@@ -14,7 +14,13 @@
 				<ul class="nav nav-tabs">
 					<li><a href="${linkTo[IndexController].index()}">Home</a></li><!-- Verepator urls absolutas linkTo[Controller].metodo -->
 					<li><a href="${linkTo[UsuarioController].lista()}">Usuarios</a></li>
-					<li><a href="${linkTo[UsuarioController].form()}">Cadastro</a></li>
+					
+					<c:if test="${usuarioLogado.logado}">
+					<li><a href="${linkTo[LoginController].desloga()}">Deslogar</a></li>
+					</c:if>
+					<c:if test="${!usuarioLogado.logado}">
+					<li><a href="${linkTo[LoginController].form()}">Autenticar</a></li>
+					</c:if>
 				</ul>
 			</nav>
 		</div>
