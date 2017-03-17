@@ -20,6 +20,18 @@ public class UsuarioLogado implements Serializable{
 		this.usuario = null;
 	}
 	public boolean isLogado(){
-		return this.usuario != null;
+		return this.getUsuario() != null;
 	}
+	
+	/**Get e set*/
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	/**Set não foi necessário nesse caso
+	 * por causa da autenticação que está 
+	 * sendo feita na tela de login...
+	 * 
+	 * */
+	
+	
 }

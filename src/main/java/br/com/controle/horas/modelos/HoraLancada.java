@@ -1,7 +1,13 @@
 package br.com.controle.horas.modelos;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+
+
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -71,6 +77,20 @@ public class HoraLancada {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
+
+	public Double getDuracao(){
+		try {
+			SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+			Date fim = format.parse(this.horaFinal);
+			Date inicio = format.parse(this.horaInicial);
+			long millis = fim.getTime() - inicio.getTime();
+								  //hora * minuto * segundo	
+			return ((double)millis)/(60*60*1000);
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return 0.0;
+		}
+	}
 	
 }
