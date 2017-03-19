@@ -1,5 +1,7 @@
 package br.com.controle.horas.controllers;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.validation.Valid;
 
@@ -8,6 +10,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.controle.horas.daos.HoraLancadaDao;
 import br.com.controle.horas.modelos.HoraLancada;
+import br.com.controle.horas.modelos.RelatorioDeHoras;
 import br.com.controle.horas.seguranca.UsuarioLogado;
 
 @Controller
@@ -50,5 +53,10 @@ public class HoraLancadaController {
 		this.result.include("horas", this.horaLancadaDao.lista());
 	}
 	
+	public void relatorioDeHoras(){
+		List<HoraLancada> horas = this.horaLancadaDao.horasDoUsuario(this.usuarioLogado.getUsuario());
+		RelatorioDeHoras relatorioDeHoras = new RelatorioDeHoras(horas);
+		this.result.include("relatorio", relatorioDeHoras);// passando para view variavel "relatorio"
+	}
 	
 }

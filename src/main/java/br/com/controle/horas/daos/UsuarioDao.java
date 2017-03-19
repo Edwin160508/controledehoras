@@ -5,6 +5,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import br.com.controle.horas.modelos.Usuario;
@@ -41,7 +42,13 @@ public class UsuarioDao {
 		query.setParameter("login", login);
 		query.setParameter("senha", senha);
 		
-		return query.getSingleResult();
+		try{
+			return query.getSingleResult();
+		}catch(NoResultException e){
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 
 }

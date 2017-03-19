@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import br.com.controle.horas.modelos.HoraLancada;
+import br.com.controle.horas.modelos.Usuario;
 
 public class HoraLancadaDao {
 
@@ -29,6 +30,12 @@ public class HoraLancadaDao {
 		this.manager.persist(horaLancada);
 		this.manager.getTransaction().commit();
 		
+	}
+	public List<HoraLancada> horasDoUsuario(Usuario usuario) {
+		String jpql = "select h from HoraLancada h where h.usuario = :usuario order by h.data";
+		TypedQuery<HoraLancada> query = this.manager.createQuery(jpql, HoraLancada.class);
+		query.setParameter("usuario", usuario);
+		return query.getResultList();		
 	}
 
 
